@@ -50,7 +50,7 @@ app.get('/browser/:name', async (req, res) => {
   }
 })
 
-app.get('/scrap', async (req, res) => {
+app.post('/scrap', async (req, res) => {
   try {
     if (!req.body.tickers) {
       res.status(404).json({
