@@ -2,7 +2,10 @@
 
 This example demonstrates how to use Playwright with Chromium and Firefox on a Heroku environment.
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Snozin/heroku-playwright-scraper)
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mxschmitt/heroku-playwright-example)
+
 
 ## General
 
