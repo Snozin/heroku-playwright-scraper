@@ -15,7 +15,6 @@ In this minimal setup, we are using an Express web server, which accepts request
 To see a live demonstration, you can checkout [heroku.playwright.tech](https://heroku.playwright.tech) or make requests to these URLs to see that a browser is launched, the specified URL is opened and a screenshot is taken and delivered to the user:
 
 - Chromium: [heroku.playwright.tech/browser/chromium?url=https://microsoft.com](https://heroku.playwright.tech/browser/chromium?url=https://microsoft.com)
-- Firefox: [heroku.playwright.tech/browser/firefox?url=https://github.com](https://heroku.playwright.tech/browser/firefox?url=https://github.com)
 
 ## Best practises
 
