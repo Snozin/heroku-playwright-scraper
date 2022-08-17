@@ -52,24 +52,50 @@ app.get('/browser/:name', async (req, res) => {
 
 app.get('/scrap', async (req, res) => {
   try {
-    let { tickers } = req?.body
-    // console.log(tickers)
+    if (!req.body.tickers) {
+      res.status(404).json({
+        error: 'no tickers provided in request',
+      })
+      return
+    }
+
+    let { tickers } = req.body
+    tickers = tickers.split(',')
 
     const browser = await chromium.launch({
       chromiumSandbox: false,
     })
     const page = await browser.newPage()
-    const url = 'https://finance.yahoo.com/quote/ko'
-
+    const url = 'https://finance.yahoo.com'
     await page.goto(url)
     await page.locator('[name="agree"]').click()
-    const data = await page.locator('h1').innerText()
+
+    const data = []
+    for (let ticker of tickers) {
+      await page.goto(`${url}/quote/${ticker}`)
+
+      const result = {}
+      result.name = await page.locator('h1').innerText()
+      result.price = await page
+        .locator(`[data-symbol="${ticker}"][data-field="regularMarketPrice"]`)
+        .innerText()
+      result.dividend = await page
+        .locator('[data-test="DIVIDEND_AND_YIELD-value"]')
+        .innerText()
+      result.exDate = await page
+        .locator('[data-test="EX_DIVIDEND_DATE-value"]')
+        .innerText()
+      result.per = await page
+        .locator('[data-test="PE_RATIO-value"]')
+        .innerText()
+
+      data.push(result)
+    }
 
     await browser.close()
-
     res.status(200).json({
-      title: data,
       tickers,
+      data,
     })
   } catch (err) {
     res.status(500).json({
