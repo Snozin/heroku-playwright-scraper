@@ -1,6 +1,5 @@
 const express = require('express')
 const { chromium } = require('playwright-chromium')
-// const { firefox } = require('playwright-firefox')
 
 const app = express()
 app.use(express.static('./public'))
@@ -46,6 +45,28 @@ app.get('/browser/:name', async (req, res) => {
     res.send(data)
   } catch (err) {
     res.status(500).send(`Something went wrong: ${err}`)
+  }
+})
+
+app.get('/scrap', async (req, res) => {
+  try {
+    const browser = await chromium.launch({
+      chromiumSandbox: false,
+    })
+    const page = await browser.newPage()
+    const url = 'https://finance.yahoo.com/quote/ko'
+
+    await page.goto(url)
+    await page.locator('[name="agree"]').click()
+    const data = await page.locator('h1').innerText()
+
+    res.status(200).json({
+      title: data,
+    })
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    })
   }
 })
 
