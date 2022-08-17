@@ -1,6 +1,6 @@
 const express = require('express')
 const { chromium } = require('playwright-chromium')
-const { firefox } = require('playwright-firefox')
+// const { firefox } = require('playwright-firefox')
 
 const app = express()
 app.use(express.static('./public'))
@@ -8,7 +8,7 @@ const port = process.env.PORT || 3000
 
 app.get('/browser/:name', async (req, res) => {
   const browserName = req.params['name'] || 'chromium'
-  if (!['chromium', 'firefox'].includes(browserName)) {
+  if (!['chromium'].includes(browserName)) {
     return res.status(500).send(`invalid browser name (${browserName})!`)
   }
 
@@ -20,7 +20,7 @@ app.get('/browser/:name', async (req, res) => {
 
   try {
     /** @type {import('playwright-chromium').Browser} */
-    const browser = await { chromium, firefox }[browserName].launch({
+    const browser = await { chromium }[browserName].launch({
       chromiumSandbox: false,
     })
     const page = await browser.newPage({
