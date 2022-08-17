@@ -3,6 +3,8 @@ const { chromium } = require('playwright-chromium')
 
 const app = express()
 app.use(express.static('./public'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 const port = process.env.PORT || 3000
 
 app.get('/browser/:name', async (req, res) => {
@@ -50,6 +52,9 @@ app.get('/browser/:name', async (req, res) => {
 
 app.get('/scrap', async (req, res) => {
   try {
+    let { tickers } = req?.body
+    // console.log(tickers)
+
     const browser = await chromium.launch({
       chromiumSandbox: false,
     })
@@ -61,9 +66,10 @@ app.get('/scrap', async (req, res) => {
     const data = await page.locator('h1').innerText()
 
     await browser.close()
-    
+
     res.status(200).json({
       title: data,
+      tickers,
     })
   } catch (err) {
     res.status(500).json({
