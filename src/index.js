@@ -60,6 +60,8 @@ app.get('/scrap', async (req, res) => {
     await page.locator('[name="agree"]').click()
     const data = await page.locator('h1').innerText()
 
+    await browser.close()
+    
     res.status(200).json({
       title: data,
     })
