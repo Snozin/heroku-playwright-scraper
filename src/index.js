@@ -1,11 +1,13 @@
 const express = require('express')
 const { chromium } = require('playwright-chromium')
+const cors = require('cors')
 
 const app = express()
+app.use(cors())
 app.use(express.static('./public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 
 app.get('/browser/:name', async (req, res) => {
   const browserName = req.params['name'] || 'chromium'
