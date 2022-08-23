@@ -96,12 +96,12 @@ app.post('/scrap', async (req, res) => {
 
     await browser.close()
     res.status(200).json({
-      tickers,
+      // tickers,
       data,
     })
   } catch (err) {
     res.status(500).json({
-      error: err.message,
+      message: err.name,
     })
   }
 })
