@@ -62,6 +62,7 @@ app.post('/scrap', async (req, res) => {
     }
 
     let { tickers } = req.body
+    tickers = tickers.toUpperCase()
     tickers = tickers.split(',')
 
     const browser = await chromium.launch({
@@ -80,7 +81,7 @@ app.post('/scrap', async (req, res) => {
       result.name = await page.locator('h1').innerText()
       result.price = await page
         .locator(`[data-symbol="${ticker}"][data-field="regularMarketPrice"]`)
-        .innerText()
+        .getAttribute('value')
       result.dividend = await page
         .locator('[data-test="DIVIDEND_AND_YIELD-value"]')
         .innerText()
@@ -96,12 +97,12 @@ app.post('/scrap', async (req, res) => {
 
     await browser.close()
     res.status(200).json({
-      // tickers,
       data,
     })
   } catch (err) {
     res.status(500).json({
-      message: err.name,
+      errorName: err.name,
+      errorMessage: err.message,
     })
   }
 })
