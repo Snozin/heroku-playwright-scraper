@@ -1,5 +1,5 @@
 {
-  "name": "heroku-playwright-example",
+  "name": "playwright-scraper",
   "version": "1.0.0",
   "description": "Example how you can use Playwright on Heroku",
   "scripts": {
