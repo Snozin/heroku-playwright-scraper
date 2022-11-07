@@ -52,7 +52,7 @@ app.get('/', async (req, res) => {
   //   res.status(500).send(`Something went wrong: ${err}`)
   // }
 
-  res.send('Holiwi de nuevo')
+  res.send('1ra versión funcionando del stock scraper online')
 })
 
 app.post('/scrap', async (req, res) => {
