@@ -1,5 +1,5 @@
 const express = require('express')
-const { chromium } = require('playwright-chromium')
+const { chromium } = require('playwright')
 const cors = require('cors')
 
 const app = express()
@@ -52,7 +52,7 @@ app.get('/', async (req, res) => {
   //   res.status(500).send(`Something went wrong: ${err}`)
   // }
 
-  res.send('Holiwi again')
+  res.send('Holiwi de nuevo')
 })
 
 app.post('/scrap', async (req, res) => {
