@@ -1,24 +1,19 @@
 {
   "name": "playwright-scraper",
   "version": "1.0.0",
-  "description": "Example how you can use Playwright on Heroku",
+  "description": "Trying Playwright on Render",
   "scripts": {
     "start": "node src/index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mxschmitt/heroku-playwright-example.git"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mxschmitt/heroku-playwright-example/issues"
   },
-  "homepage": "https://github.com/mxschmitt/heroku-playwright-example#readme",
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "playwright-chromium": "1.25.0"
+    "cors": "2.8.5",
+    "express": "4.17.1",
+    "playwright-chromium": "1.27.0"
   }
 }
